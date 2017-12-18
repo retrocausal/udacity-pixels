@@ -1,19 +1,16 @@
-$(() =>
-{
-  const gatherUserInputs = () =>
-  {
+$(() => {
+  const start = () => {
     console.log("gathering user inputs");
-    let colorPicker = $("#color-picker");
-    colorPicker.hide();
-    let depth, length, color;
-    [depth, length] = [$("#input_height")
-      .val(), $("#input_width")
+    let depth, length;
+    [depth, length] = [
+      $("#input_height")
+      .val(),
+      $("#input_width")
       .val()
     ];
     return buildCanvas(depth, length);
   };
-  const buildCanvas = (...dimensions) =>
-  {
+  const buildCanvas = (...dimensions) => {
     let wrapper = $(".canvas-wrap")
       .find("figure");
     let [depth, length] = dimensions;
@@ -22,8 +19,7 @@ $(() =>
     let h, w;
     wrapperWidth = wrapper.width();
     cssW = cssH = wrapperWidth / length;
-    if ((length * 40) < wrapperWidth)
-    {
+    if ((length * 40) < wrapperWidth) {
       cssW = cssH = 40;
     }
     $("#canvas")
@@ -31,18 +27,15 @@ $(() =>
     wrapper.prepend($(`<table class="canvas" id="canvas"></table>`)
       .hide()
       .fadeIn(2000));
-    for (h = 0; h < depth; h++)
-    {
+    for (h = 0; h < depth; h++) {
       $("#canvas")
         .append($(`<tr class="canvas-row" id="canvas-row-${h}"></tr>`)
           .hide()
           .fadeIn(2000));
-      for (w = 0; w < length; w++)
-      {
+      for (w = 0; w < length; w++) {
         $(`#canvas-row-${h}`)
           .append($(`<td class="canvas-cell" id="canvas-row-${h}-cell-${w}"></td>`)
-            .css(
-            {
+            .css({
               "width": `${cssW}px`,
               "height": `${cssH}px`,
               "max-width": `${cssW}px`,
@@ -53,34 +46,57 @@ $(() =>
       }
     }
     $("#caption")
-      .html($("<h2>canvas</h2>")
+      .html($('<h2> canvas </h2>')
         .hide()
         .fadeIn(5000));
-    $(".canvas-row .canvas-cell")
-      .on("click", (e) =>
-      {
-        const id = $(e.target)
+    return activateCanvas();
+  };
+  const activateCanvas = () => {
+    return $(".canvas-cell")
+      .on("click", (eCell) => {
+        let colorPicker = $('<input type="color"></input>')
+          .hide();
+        let id = $(eCell.target)
           .attr("id");
-        const x = e.pageX;
-        const y = e.pageY;
-        let colorPicker = $("#color-picker");
-        colorPicker.css(
-        {
+        colorPicker.attr("id", `color-picker-${id}`);
+        const x = eCell.pageX;
+        const y = eCell.pageY;
+        colorPicker.css({
           "position": "absolute",
           "top": `${y - 20}px`,
           "left": `${x}px`,
           "z-index": 100
         });
-        colorPicker = colorPicker.hide()
-          .fadeIn(2000);
-        colorPicker.removeClass("hidden");
+        $("BODY")
+          .append(colorPicker);
+        colorPicker.hide()
+          .fadeIn(2000)
+          .on("mouseleave", (e) => {
+            $(e.target)
+              .fadeOut(3000);
+          })
+          .on("mouseover", (e) => {
+            $(e.target)
+              .stop()
+              .fadeIn();
+          })
+          .on("click", (e) => {
+            let cpID = $(e.target)
+              .attr("id");
+          })
+          .on("change", (e) => {
+            let cpID = $(e.target)
+              .attr("id");
+            $(`#${id}`)
+              .css("background-color", `${$(e.target).val()}`);
+            $(e.target)
+              .remove();
+          });
       });
   };
-
   $("#size-picker")
-    .on("submit", (e) =>
-    {
+    .on("submit", (e) => {
       e.preventDefault();
-      gatherUserInputs();
-    })
-})
+      start();
+    });
+});
