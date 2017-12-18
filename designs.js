@@ -13,11 +13,11 @@
  *@params none
  */
 $(() => {
-  /**
-   *start
+  /*
+   *@name start
    *@params none
-   *triggered via the "submit" event on the form
-   *sources the depth and length of the canvas to draw on
+   *@description Triggered via the "submit" event on the form
+   *Sources the depth and length of the canvas to draw on
    */
   const start = () => {
     let depth, length;
@@ -29,10 +29,10 @@ $(() => {
     ];
     return buildCanvas(depth, length);
   };
-  /**
-   *buildCanvas
-   *@params spread dimensions array with depth and length as elements
-   *called after sourcing user inputs
+  /*
+   *@name buildCanvas
+   *@params [spread dimensions] array with depth and length as elements
+   *@description Called after sourcing user inputs
    *builds the table to be used as the canvas to make pixel art
    */
   const buildCanvas = (...dimensions) => {
@@ -89,10 +89,10 @@ $(() => {
     return activateCanvas();
   };
 
-  /**
-   *activateCanvas
+  /*
+   *@name activateCanvas
    *@params none
-   *attaches the event handlers required on each individual canvas cell
+   *@description attaches the event handlers required on each individual canvas cell
    *when a user clicks on a particular cell, the cell would have a UNIQUE ID
    *This id is used later to fill a chosen background color to the particular cell.
    *Each canvas cell, activates EXACTLY ONE color-picker, and later removes it from the DOM.
