@@ -16,6 +16,16 @@ h2:first-of-type {
   margin-top: 0.5em;
 }
 
+.instruction-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.instruction-item {
+  list-style: none;
+}
+
 table,
 td,
 tr {
@@ -40,6 +50,7 @@ table {
 .canvas-cell {
   width: 40px;
   height: 40px;
+  background-color: #fff;
 }
 
 input[type=number] {
@@ -54,4 +65,10 @@ input[type=number] {
   min-width: 100%;
   max-width: 100%;
   width: 100%;
+}
+
+.mcpform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

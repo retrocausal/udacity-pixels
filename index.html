@@ -17,16 +17,38 @@
     <h2>Choose Grid Size</h2>
     <form id="size-picker">
       Grid Height:
-      <input type="number" id="input_height" name="height" min="1" value="1">
+      <input type="number" id="input_height" name="height" min="2" max="200" value="2">
       Grid Width:
-      <input type="number" id="input_width" name="width" min="1" value="1">
+      <input type="number" id="input_width" name="width" min="2" max="200" value="2">
       <input type="submit">
     </form>
+    <div class="instructions">
+      <h2>Instructions</h2>
+      <ul class="instruction-list">
+        <li class="instruction-item">
+          Click on a cell on the canvas</li>
+        <li class="instruction-item">
+          Choose a color from the color picker
+        </li>
+        <li class="instruction-item">
+          <h4>Optional :</h4>
+          <p>Choose a color from the color picker below the canvas, and click on all cells you want that color on</p>
+          <p>Changed your mind, want to paint single cells again?</p>
+          <p>Easy! Just uncheck that large check next to the color picker below the canvas</p>
+        </li>
+      </ul>
+    </div>
     <div class="canvas-wrap">
       <figure>
         <table id="canvas"></table>
         <figcaption id="caption"></figcaption>
       </figure>
+      <div class="multiplier hidden">
+        <h2>Paint Multiple Cells</h2>
+        <div class="mcpform">
+          <input type="color" id="multiple-cell-painter" value="#ffffff">
+        </div>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="designs.js"></script>
