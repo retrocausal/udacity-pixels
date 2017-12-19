@@ -184,8 +184,7 @@ $(() => {
    */
   const initCanvas = (eCell) => {
     //create a new input dedicated to a cell, hide by default until required
-    let colorPicker = $('<input type="color"></input>')
-      .hide();
+    let colorPicker = $('<input type="color"></input>');
     const id = $(eCell.target)
       .attr("id");
     colorPicker.attr("id", `color-picker-${id}`);
